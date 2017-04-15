@@ -1,0 +1,10 @@
+from db import conn
+import feelHash
+
+class dbDict():
+    def __init__(self,img1,img2):
+        self.img1 = img1
+        self.img2 = img2
+        self.cur = conn.cursor()
+
+    feelHash.pHash()
