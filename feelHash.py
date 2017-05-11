@@ -152,5 +152,5 @@ def pHash(image1, image2, size=(32, 32), part_size=(8, 8)):
 
 if __name__ == '__main__':
     img_1 = Image.open("testImage/test.jpg")
-    img_2 = Image.open("testImage/testN.jpG")
+    img_2 = Image.open("testImage/test1.jpG")
     print pHash(img_1, img_2)

@@ -64,5 +64,5 @@ def aHash(image1, image2, size=(8, 8), exact=25):  #exact是我们自己设定�
 
 if __name__ =='__main__':
     img_1 = Image.open("testImage/test.jpg")
-    img_2 = Image.open("testImage/test4.jpg")
+    img_2 = Image.open("testImage/test1.jpg")
     print aHash(img_1,img_2)

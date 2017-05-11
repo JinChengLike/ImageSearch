@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片检索系统</title>
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/index.js"></script>
+    <script src="/static/css/bootstrap/js/bootstrap.min.js"></script>
+    <link href="/static/css/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/index.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="container">
+    <h1>图片检索系统</h1>
+    <div class="row" style="margin-top:20px">
+        <div class="col-md-3">
+            <form action="/insertNewImage" enctype="multipart/form-data" method="post">
+                {% import "bootstrap/wtf.html" as wtf %}
+                {{ wtf.quick_form(form) }}
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-5">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">直方算法检索</button>
+                <button type="button" class="btn btn-default">平均哈希检索</button>
+                <button type="button" class="btn btn-default">感知哈希检索</button>
+                <button type="button" class="btn btn-default">渐变哈希检索</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:50px">
+        <div class="col-md-3">
+            <label>上传需要检索的图片</label>
+            <input type="file" class="form-control" id="filesearch"/>
+            <button type="button" class="btn btn-link" id="search">搜索</button>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-5">
+            <p>搜索结果</p>
+            <div>
+                <img src="/static/image/test.jpg" style="height:300px;width:500px"/>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

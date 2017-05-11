@@ -8,7 +8,7 @@ from PIL import Image
 # 循环判断，遍历所有像素的颜色空间值，相同记为一，不相同通过注释的公式进行计算，存在列表中
 # 整个列表的求平均获取相似值，越接近一越相似
 
-def classfiy_histogram(image1, image2, size=(256, 256)):
+def classfiy_histogram(image1, image2, size=(128, 128)):
     image1 = image1.resize(size).convert("RGB")
     g = image1.histogram()  # 获取图片直方图数据
 
@@ -31,5 +31,5 @@ def classfiy_histogram(image1, image2, size=(256, 256)):
 
 if __name__ == '__main__':
     img_1 = Image.open("testImage/test.jpg")
-    img_2 = Image.open("testImage/testN.jpG")
+    img_2 = Image.open("testImage/test4.jpG")
     print classfiy_histogram(img_1, img_2)
