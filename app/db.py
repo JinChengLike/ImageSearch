@@ -12,5 +12,13 @@ class db:
         )
         self.cur = self.conn.cursor()
 
-    def insertNew(self, haming, path, way):
-        return 0
+    def insertNew(self, path, hamingWay, hamingAverage, hamingChange, hamingFeel, ):
+        sql = "insert into imageWay (path,hamingWay,hamingAverage,hamingChange,hamingFeel) values ('" + path + "','" + hamingWay + "','" + hamingAverage + "','" + hamingChange + "','" + hamingFeel + "');"
+        try:
+            self.cur.execute(sql)
+            self.conn.commit()
+        except Exception as e:
+            print e
+            self.conn.rollback()
+        self.cur.close()
+        self.conn.close()

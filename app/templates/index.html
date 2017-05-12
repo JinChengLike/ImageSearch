@@ -19,32 +19,28 @@
                 {% import "bootstrap/wtf.html" as wtf %}
                 {{ wtf.quick_form(form) }}
             </form>
+            <div style="margin-top:50px">
+                <form action="/search" enctype="multipart/form-data" method="post">
+                    {% import "bootstrap/wtf.html" as wtf %}
+                    {{ wtf.quick_form(checkform) }}
+                </form>
+            </div>
+
         </div>
         <div class="col-md-3"></div>
         <div class="col-md-5">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default">直方算法检索</button>
-                <button type="button" class="btn btn-default">平均哈希检索</button>
-                <button type="button" class="btn btn-default">感知哈希检索</button>
-                <button type="button" class="btn btn-default">渐变哈希检索</button>
+            <p>搜索结果</p>
+            <div>
+                <img src="/static/upload/1494496907.jpg" style="height:300px;width:500px"/>
             </div>
         </div>
     </div>
 
     <div class="row" style="margin-top:50px">
         <div class="col-md-3">
-            <label>上传需要检索的图片</label>
-            <input type="file" class="form-control" id="filesearch"/>
-            <button type="button" class="btn btn-link" id="search">搜索</button>
-        </div>
-        <div class="col-md-3"></div>
-        <div class="col-md-5">
-            <p>搜索结果</p>
-            <div>
-                <img src="/static/image/test.jpg" style="height:300px;width:500px"/>
-            </div>
 
         </div>
+
     </div>
 
 </div>
