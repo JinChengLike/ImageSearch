@@ -1,4 +1,3 @@
-# coding=utf-8
 from __future__ import division
 from PIL import Image
 from PIL import ImageFilter
@@ -6,19 +5,17 @@ from PIL import ImageOps
 import math
 
 
-class ImageHandle:  # 直方图算法
+class SearchHandle():
     def __init__(self, img):
-        img = 'app/static/upload/' + img
         self.img = Image.open(img)
 
     def ImageWay(self):
         size = (128, 128)
         image1 = self.img.resize(size).convert("RGB")
-        data = image1.histogram()  # 获取图片直方图数据
-        data = ImageHandle.turnStr(self, data)
+        data = image1.histogram()
         return data
 
-    def AverageHash(self):  # 平均哈希算法
+    def AverageHash(self):
         size = (8, 8)
         pixel = []
         img = self.img.resize(size).convert('L')
@@ -36,10 +33,10 @@ class ImageHandle:  # 直方图算法
                 cp.append(1)
             else:
                 cp.append(0)
-        cp = ImageHandle.turnStr(self, cp)
+        cp = SearchHandle.turnStr(self, cp)
         return cp
 
-    def changeHash(self):  # 转换哈希算法
+    def changeHash(self):
         size = (9, 8)
         img = self.img.resize(size).convert('L')
         result = []
@@ -54,20 +51,20 @@ class ImageHandle:  # 直方图算法
                     result.append(1)
                 else:
                     result.append(0)
-        result = ImageHandle.turnStr(self, result)
+        result = SearchHandle.turnStr(self, result)
         return result
 
-    def feelHash(self):  # 感知哈希算法
+    def feelHash(self):
         size = (32, 32)
         part_size = (8, 8)
         img = self.img.resize(size).convert('L').filter(ImageFilter.BLUR)
         img = ImageOps.equalize(img)
-        matrix = ImageHandle.get_matrix(self, img)
-        DCT_matrix = ImageHandle.DCT(self, matrix)
-        List = ImageHandle.sub_matrix_to_list(self, DCT_matrix, part_size)
-        middle = ImageHandle.get_middle(self, List)
-        code1 = ImageHandle.get_Haming(self, List, middle)
-        code = ImageHandle.turnStr(self, code1)
+        matrix = SearchHandle.get_matrix(self, img)
+        DCT_matrix = SearchHandle.DCT(self, matrix)
+        List = SearchHandle.sub_matrix_to_list(self, DCT_matrix, part_size)
+        middle = SearchHandle.get_middle(self, List)
+        code1 = SearchHandle.get_Haming(self, List, middle)
+        code = SearchHandle.turnStr(self, code1)
         return code
 
     def get_matrix(self, image):
@@ -84,11 +81,11 @@ class ImageHandle:  # 直方图算法
 
     def DCT(self, double_matrix):
         n = len(double_matrix)
-        A = ImageHandle.get_coefficient(self, n)
-        AT = ImageHandle.get_transposing(self, A)
+        A = SearchHandle.get_coefficient(self, n)
+        AT = SearchHandle.get_transposing(self, A)
 
-        temp = ImageHandle.get_mult(self, double_matrix, A)
-        DCT_matrix = ImageHandle.get_mult(self, temp, AT)
+        temp = SearchHandle.get_mult(self, double_matrix, A)
+        DCT_matrix = SearchHandle.get_mult(self, temp, AT)
 
         return DCT_matrix
 
@@ -168,7 +165,3 @@ class ImageHandle:  # 直方图算法
             s = s + str(list[i])
             i = i + 1
         return s
-
-
-if __name__ == "__main__":
-    print ImageHandle('1494560808.JPG').changeHash()

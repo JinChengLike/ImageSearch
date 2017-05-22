@@ -35,17 +35,12 @@ def comp_code(code1, code2):  # 对比返回两个图片的汉明距离
 
 
 def get_middle(List):
-    li = List
-    li.sort()
-    value = 0
-    if len(li) % 2 == 0:
-        index = int((len(li) / 2)) - 1
-
-        value = li[index]
-    else:
-        index = int((len(li) / 2))
-        value = (li[index] + li[index - 1]) / 2
-    return value
+    num = 0
+    total = 0
+    for item in List:
+        total += item
+        num += 1
+    return total / num
 
 
 def get_matrix(image):
@@ -127,7 +122,7 @@ def sub_matrix_to_list(DCT_matrix, part_size):
     return List
 
 
-def pHash(image1, image2, size=(32, 32), part_size=(8, 8)):
+def pHash(image1, image2, size=(64, 64), part_size=(8, 8)):
     assert size[0] == size[1], "size error"
     assert part_size[0] == part_size[1], "part_size error"
 
@@ -152,5 +147,5 @@ def pHash(image1, image2, size=(32, 32), part_size=(8, 8)):
 
 if __name__ == '__main__':
     img_1 = Image.open("testImage/test.jpg")
-    img_2 = Image.open("testImage/test1.jpG")
+    img_2 = Image.open("testImage/testN.jpg")
     print pHash(img_1, img_2)

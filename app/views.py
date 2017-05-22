@@ -3,7 +3,7 @@ from app import app
 from app import formModel
 from flask import render_template, request
 from werkzeug.utils import secure_filename
-from app import ImageCheckModel, ImageHandleModel, db
+from app import ImageCheckModel, ImageHandleModel, db, Check
 import os
 import time
 
@@ -44,5 +44,8 @@ def insertNewImage():
 def search():
     checkform = formModel.FileCheck()
     form = formModel.NewFileForm()
+    file = checkform.file.data
     type = checkform.type.data
-    return "1"
+    ch = Check.Check(file, type)
+    path = ch.doCheck()
+    return render_template("index.html", form=form, checkform=checkform,path=path)

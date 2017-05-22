@@ -22,3 +22,32 @@ class db:
             self.conn.rollback()
         self.cur.close()
         self.conn.close()
+
+    def select(self, type):
+        sql = "select id,+" + type + " from imageWay;"
+        self.cur.execute(sql)
+        rs = self.cur.fetchall()
+        self.cur.close()
+        self.conn.close()
+        return rs
+
+    def select_path(self):
+        sql = 'select path from imageWay;'
+        self.cur.execute(sql)
+        rs = self.cur.fetchall()
+        self.cur.close()
+        self.conn.close()
+        return rs
+
+    def getPath(self, id):
+        sql = "select path from imageWay where id = " + str(id) + ";"
+        self.cur.execute(sql)
+        rs = self.cur.fetchone()
+        self.cur.close()
+        self.conn.close()
+        return rs[0]
+
+
+if __name__ == "__main__":
+    aa = db().select_path()
+    print aa[0]

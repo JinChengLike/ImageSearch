@@ -5,9 +5,8 @@ from PIL import ImageOps
 
 
 class ImageCheckModel:
-    def checkByImageWay(self,img1,img2):
+    def checkByImageWay(self, img1, img2):
         assert len(img1) == len(img2), "error"
-
         data = []
 
         for index in range(0, len(img1)):
@@ -18,3 +17,11 @@ class ImageCheckModel:
                 data.append(1)
         res = sum(data) / len(img1)
         return round(res, 4)
+
+    def checkByOther(self, code1, code2):  # 对比返回两个图片的汉明距离
+        num = 0
+        for index in range(0, len(code1)):
+            if code1[index] != code2[index]:
+                num += 1
+        return num
+

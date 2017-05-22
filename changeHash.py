@@ -52,5 +52,5 @@ def change_Hash(image1, image2, size=(9, 8)):
 
 if __name__ == '__main__':
     img_1 = Image.open("testImage/test.jpg")
-    img_2 = Image.open("testImage/testN.jpg")
+    img_2 = Image.open("testImage/test.jpg")
     print change_Hash(img_1, img_2)
