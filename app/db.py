@@ -47,7 +47,22 @@ class db:
         self.conn.close()
         return rs[0]
 
+    def login(self, username, passwords):
+        sql = "select * from user where username ='" + username + "';"
+        self.cur.execute(sql)
+        rs = self.cur.fetchone()
+        self.cur.close()
+        self.conn.close()
+        if rs != None:
+            password = rs[1]
+            if password == passwords:
+                res = rs[2]
+                return res
+            else:
+                return 5
+        else:
+            return 5
 
 if __name__ == "__main__":
-    aa = db().select_path()
-    print aa[0]
+    aa = db().login("chain","123456")
+    print aa

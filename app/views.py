@@ -1,7 +1,7 @@
 # coding=utf-8
 from app import app
 from app import formModel
-from flask import render_template, request
+from flask import render_template, request,jsonify
 from werkzeug.utils import secure_filename
 from app import ImageCheckModel, ImageHandleModel, db, Check
 import os
@@ -13,11 +13,25 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 ALLOWED_EXTENSIONS = set(['txt', 'png', 'jpg', 'xls', 'JPG', 'PNG', 'xlsx', 'gif', 'GIF'])
 
 
-@app.route('/')
+@app.route('/index')
 def index():
     checkform = formModel.FileCheck()
     form = formModel.NewFileForm()
     return render_template("index.html", form=form, checkform=checkform)
+
+
+@app.route('/')
+def login():
+    return render_template("login.html")
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def checkLogin():
+    username = request.form['username']
+    password = request.form['password']
+    result = db.db().login(username, password)
+    result = jsonify({'code':result})
+    return result
 
 
 @app.route('/insertNewImage', methods=['GET', 'POST'])
@@ -48,4 +62,4 @@ def search():
     type = checkform.type.data
     ch = Check.Check(file, type)
     path = ch.doCheck()
-    return render_template("index.html", form=form, checkform=checkform,path=path)
+    return render_template("index.html", form=form, checkform=checkform, path=path)
