@@ -63,6 +63,20 @@ class db:
         else:
             return 5
 
+    def newUser(self, username, password):
+        sql = "insert into user values ('" + username + "','" + password + "',0);"
+        try:
+            self.cur.execute(sql)
+            self.conn.commit()
+        except Exception as e:
+            print e
+            self.conn.rollback()
+            return 1
+        self.cur.close()
+        self.conn.close()
+        return 0
+
+
 if __name__ == "__main__":
-    aa = db().login("chain","123456")
+    aa = db().login("chain", "123456")
     print aa

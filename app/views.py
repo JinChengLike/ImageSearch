@@ -1,7 +1,7 @@
 # coding=utf-8
 from app import app
 from app import formModel
-from flask import render_template, request,jsonify
+from flask import render_template, request, jsonify
 from werkzeug.utils import secure_filename
 from app import ImageCheckModel, ImageHandleModel, db, Check
 import os
@@ -30,7 +30,16 @@ def checkLogin():
     username = request.form['username']
     password = request.form['password']
     result = db.db().login(username, password)
-    result = jsonify({'code':result})
+    result = jsonify({'code': result})
+    return result
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    username = request.form['username']
+    password = request.form['password']
+    result = db.db().newUser(username, password)
+    result = jsonify({'code': result})
     return result
 
 
